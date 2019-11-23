@@ -6,6 +6,12 @@
 	"engines": {
 		"vscode": "^1.40.0"
 	},
+	"publisher": "liuhe945",
+	"keywords": [
+		"alias",
+		"webpack",
+		"别名跳转"
+	],
 	"categories": [
 		"Other"
 	],
@@ -19,6 +25,10 @@
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile",
 		"test": "node ./out/test/runTest.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:redDragonLH/vscode-jumpAliasPath.git"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
