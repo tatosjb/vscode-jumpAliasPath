@@ -1,7 +1,7 @@
 {
-	"name": "jump",
-	"displayName": "jump",
-	"description": "jump",
+	"name": "jumpAliasPath",
+	"displayName": "jumpAliasPath",
+	"description": "jumpAliasPath",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.40.0"
@@ -12,12 +12,6 @@
 	"activationEvents":["*"],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
-			}
-		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
