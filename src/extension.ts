@@ -1,7 +1,7 @@
 // ### 获取项目名~~
 import * as vscode from 'vscode';
 import * as path   from 'path';
-import { realFilePath,aliasMatch } from './utils'
+import { realFilePath,aliasMatch,getConfigFile } from './utils'
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -13,20 +13,26 @@ export function activate(context: vscode.ExtensionContext) {
 		{ scheme: 'file', language: 'javascriptreact' }
 	], {
 		provideDefinition(document, position, token) {
-			let file = '';
-			const fileName = document.fileName; // 当前文件的绝对路径加文件名
-			const workDir = path.dirname(fileName); // 当前文件的绝对路径
 			const linetext = document.lineAt(position).text; // 当前行字符串
 			let filepathArr = linetext.match(/import.*?from '(.*)'|"(.*)";*/);
 			let pos = linetext.search(/'(.*)'|"(.*)";*/);
-
+			
 			if(!filepathArr || position.character < pos){ // 点击引用字符串才能跳转（点击名字后续增加）
 				return null;
 			}
-			let aliaName = filepathArr[1]; // 引用的字符串
-			if(/^@.*\//.test(aliaName)){
-				aliaName = aliasMatch(aliaName);
+			let file = '';
+			const fileName = document.fileName; // 当前文件的绝对路径加文件名
+			const workDir = path.dirname(fileName); // 当前文件的绝对路径
+
+			const webpackConfig = require(getConfigFile(workDir)); // 获取配置文件
+			
+			let aliaName = filepathArr[1]; // 匹配的字符串
+			if(/^@.*\/*/.test(aliaName)){
+				aliaName = aliasMatch(aliaName,webpackConfig.resolve.alias); // 获取这次的映射名称
+				console.log(aliaName);
+				
 				file = realFilePath(path.resolve(workDir,aliaName));
+
 				return new vscode.Location(vscode.Uri.file(file), new vscode.Position(0, 0));
 			}
 			return null;
