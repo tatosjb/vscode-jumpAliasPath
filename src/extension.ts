@@ -29,10 +29,13 @@ export function activate(context: vscode.ExtensionContext) {
 			let aliaName = filepathArr[1]; // 匹配的字符串
 			if(/^@.*\/*/.test(aliaName)){
 				aliaName = aliasMatch(aliaName,webpackConfig.resolve.alias); // 获取这次的映射名称
-				console.log(aliaName);
 				
-				file = realFilePath(path.resolve(workDir,aliaName));
-
+				// file = realFilePath(path.resolve(workDir,aliaName));
+				// let openTextDocument =  vscode.workspace.openTextDocument(vscode.Uri.file(file));
+				// openTextDocument.then((res)=>{
+				// 	console.log(res);
+					
+				// })
 				return new vscode.Location(vscode.Uri.file(file), new vscode.Position(0, 0));
 			}
 			return null;
