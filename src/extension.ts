@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 			if(/^@.*\/*/.test(aliaName)){
 				aliaName = aliasMatch(aliaName,webpackConfig.resolve.alias); // 获取这次的映射名称
 				
-				// file = realFilePath(path.resolve(workDir,aliaName));
+				file = realFilePath(path.resolve(workDir,aliaName));
 				// let openTextDocument =  vscode.workspace.openTextDocument(vscode.Uri.file(file));
 				// openTextDocument.then((res)=>{
 				// 	console.log(res);
