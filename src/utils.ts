@@ -22,8 +22,9 @@ const realFilePath: any = (targetPath: string) => {
                 return `${targetPath}.${item}`;
             }
         }
+    }else{ // 带后缀~
+        return targetPath;
     }
-    return '';
 }
 const aliasMatch:any= (aliaName: string) =>{
     let filename = '';

@@ -16,10 +16,11 @@
 		"Other"
 	],
 	"icon": "favicon.ico",
-	"activationEvents":["*"],
+	"activationEvents": [
+		"*"
+	],
 	"main": "./out/extension.js",
-	"contributes": {
-	},
+	"contributes": {},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
