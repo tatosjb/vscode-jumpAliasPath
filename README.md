@@ -40,7 +40,7 @@
 ### 指示 webpack config 文件名称
 `fileAliasSetting.configPos`指示 webpack config 文件名称，键名为项目文件夹名，值为 `webpack config` 文件名
 
-        "fileAliasSetting.configPos": {
+        "fileAliasSetting.configPath": {
             "项目根目录":"webpack 配置项文件名",
         },
 
@@ -59,5 +59,6 @@
 |支持 webpack config| 高| 10%|支持webpack的配置文件的`alias` 字段 |
 |支持 完整[webpack 别名](https://webpack.docschina.org/configuration/resolve/#resolve-alias)|高|未完成| |
 | typeScript 化| 低|未完成||
-|支持分项目解析|低|未完成| 需要先识别根目录|
+|支持分项目解析|低|未完成| 需要先识别根目录/[workspace](https://code.visualstudio.com/api/references/vscode-api#workspace)相关API可以获取工作区文件夹名称|
 |数据持久化|低|未完成||
+|解析所选传入方法位置|低|未完成|先看api|

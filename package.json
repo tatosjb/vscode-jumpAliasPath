@@ -20,7 +20,34 @@
 		"*"
 	],
 	"main": "./out/extension.js",
-	"contributes": {},
+	"contributes": {
+		"configuration": {
+		"type": "object",
+		"title": "fileAliasjumpSetting",
+		"properties": {
+				"fileAliasSetting.aliasMap": {
+						"type": "object",
+						"default": {},
+						"scope": "resource",
+						"description": "alias 映射表，同webpack配置"
+				},
+				"fileAliasSetting.configPath": {
+						"type": "object",
+						"default": {
+							"default":"webpack.config.js"
+						},
+						"scope": "resource",
+						"description": "webpack config 路径,可以以项目文件夹分别设置"
+				},
+				"fileAliasSetting.fileSuffixs": {
+					 "type": "array",
+						"scope": "resource",
+						"default": [],
+					 "description": "需要识别语言的后缀"
+				}
+		 }
+	 }
+	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",

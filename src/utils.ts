@@ -1,7 +1,7 @@
 import * as vscode   from 'vscode';
 import * as path   from 'path';
 import * as fs   from 'fs';
-const { fileSuffixs,aliasMap,configPos } = (<any>vscode.workspace.getConfiguration().get('fileAliasSetting'))
+const { fileSuffixs,aliasMap,configPath } = (<any>vscode.workspace.getConfiguration().get('fileAliasSetting'))
 const locfileSuffix = ["js","ts","vue","jsx"];
 const fileSuffixCON = Array.from(new Set(locfileSuffix.concat(fileSuffixs)));
 const WEBPACK_DEFAULT_CONFIG_NAME = "webpack.config.js";
@@ -64,12 +64,12 @@ const getConfigFile: any = (workDir: string) => {
     let workDirArrTemp = workDirArr.slice(0); // 获取临时数组，会改变
     let filePos = workDir; // 当前循环到哪个文件夹
     let configName = '';
-    for (const key in configPos) { // 循环遍历 setting.json 里的 fileAliasSetting.configPos 配置
+    for (const key in configPath) { // 循环遍历 setting.json 里的 fileAliasSetting.configPos 配置
         if(RegExp(key,'g').test(workDir)){
-            configName = configPos[key];
+            configName = configPath[key];
         }
     }
-    configName = configName ? configName: (configPos.default || WEBPACK_DEFAULT_CONFIG_NAME); // 默认名称
+    configName = configName ? configName: (configPath.default || WEBPACK_DEFAULT_CONFIG_NAME); // 默认名称
     if(configName){
         for (let index = 0; index < workDirArr.length; index++) { // 遍历 文件夹，找到 config文件位置
             if(isFileExists(filePos + configName)){
