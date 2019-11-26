@@ -26,8 +26,9 @@ const realFilePath: any = (targetPath: string) => {
                 return `${targetPath}.${item}`;
             }
         }
+    }else{ // 带后缀~
+        return targetPath;
     }
-    return '';
 }
 /**
  * 确定文件是否存在
