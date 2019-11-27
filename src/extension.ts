@@ -1,7 +1,8 @@
 // ### 获取项目名~~
 import * as vscode from 'vscode';
 import * as path   from 'path';
-import { realFilePath,aliasMatch,getConfigFile } from './utils'
+const { configPath } = (<any>vscode.workspace.getConfiguration().get('fileAliasSetting'))
+import { realFilePath,aliasMatch,getConfigFileFun } from './utils'
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -23,12 +24,17 @@ export function activate(context: vscode.ExtensionContext) {
 			let file = '';
 			const fileName = document.fileName; // 当前文件的绝对路径加文件名
 			const workDir = path.dirname(fileName); // 当前文件的绝对路径
-
-			const webpackConfig = require(getConfigFile(workDir)); // 获取配置文件
-			
+			const spaceFolder = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(fileName)) || {name:''};
+			let aliasconfigStr = '';
+			if(configPath[spaceFolder.name]){
+				aliasconfigStr = configPath[spaceFolder.name];
+			}else{
+				aliasconfigStr = getConfigFileFun(spaceFolder); // 获取配置文件
+			}
+			const aliasconfig = aliasconfigStr ? require(aliasconfigStr) : {};
 			let aliaName = filepathArr[1]; // 匹配的字符串
 			if(/^@.*\/*/.test(aliaName)){
-				aliaName = aliasMatch(aliaName,webpackConfig.resolve.alias); // 获取这次的映射名称
+				aliaName = aliasMatch(aliaName,aliasconfig.resolve.alias); // 获取这次的映射名称
 				
 				file = realFilePath(path.resolve(workDir,aliaName));
 				// let openTextDocument =  vscode.workspace.openTextDocument(vscode.Uri.file(file));

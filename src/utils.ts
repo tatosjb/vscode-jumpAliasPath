@@ -29,13 +29,13 @@ const realFilePath: any = (targetPath: string) => {
     }else{ // 带后缀~
         return targetPath;
     }
-}
+};
 /**
  * 确定文件是否存在
  */
 const isFileExists: any = (targetPath: string)=>{
     return fs.existsSync(targetPath);
-}
+};
 /**
  * 匹配别名映射
  * 
@@ -53,38 +53,27 @@ const aliasMatch:any= (aliaName: string,webpackAliasConfig:object) =>{
     }
     
     return filename;
-}
+};
 /**
  * 获取webpack config 文件，进而获取 配置文件内容 alias 配置
  */
-const getConfigFile: any = (workDir: string) => {
+const getConfigFileFun: any = (workDir: object) => {
     
     let ConfigFilePos = ''; // 返回的配置文件位置
-    const workDirArr = workDir.split('\\'); // 切位数组，循环遍历查找 文件位置
-    let workDirArrTemp = workDirArr.slice(0); // 获取临时数组，会改变
-    let filePos = workDir; // 当前循环到哪个文件夹
-    let configName = '';
-    for (const key in configPath) { // 循环遍历 setting.json 里的 fileAliasSetting.configPos 配置
-        if(RegExp(key,'g').test(workDir)){
-            configName = configPath[key];
+    const packageConfig =isFileExists(workDir.uri + 'package.json')
+    if(packageConfig){
+        if(packageConfig[devDependencies]['webpak'] || packageConfig[dependencies]['webpak']){
+            let path = workDir.uri + WEBPACK_DEFAULT_CONFIG_NAME;
+            return ConfigFilePos = isFileExists(path)? path: '';
+        }else{
+            return ConfigFilePos;
         }
-    }
-    configName = configName ? configName: (configPath.default || WEBPACK_DEFAULT_CONFIG_NAME); // 默认名称
-    if(configName){
-        for (let index = 0; index < workDirArr.length; index++) { // 遍历 文件夹，找到 config文件位置
-            if(isFileExists(filePos + configName)){
-                ConfigFilePos = filePos + configName;
-                break;
-            }else{
-                workDirArrTemp.pop(); // 未匹配则去掉最后一个文件名继续匹配
-                filePos = workDirArrTemp.join('\\') +'\\';
-            }
-        }
+    }else{
         return ConfigFilePos;
     }
-}
+};
 export {
     realFilePath,
     aliasMatch,
-    getConfigFile
+    getConfigFileFun
 }
