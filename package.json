@@ -2,7 +2,7 @@
 	"name": "jump-alias-path",
 	"displayName": "jumpAliasPath",
 	"description": "jumpAliasPath",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.40.0"
 	},
@@ -20,7 +20,32 @@
 		"*"
 	],
 	"main": "./out/extension.js",
-	"contributes": {},
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "jumpAliasPath setting",
+			"properties": {
+				"fileAliasSetting.aliasMap": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "以工作空间顶层文件夹命名的映射表"
+				},
+				"fileAliasSetting.fileSuffixs": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "需要解析的文件名称"
+				},
+				"fileAliasSetting.configPos": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "指示webpack config 文件夹相对位置，首推"
+				}
+			}
+		}
+	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",

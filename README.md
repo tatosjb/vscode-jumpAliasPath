@@ -20,10 +20,16 @@
 
 *没有太好的办法确定根目录，暂时使用绝对路径*
 
-*aliasMap分组识别暂未完成*
+**aliasMap分组识别已经完成**
 
+        // 以命名空间顶层文件夹名为键
         "fileAliasSetting.aliasMap": {
-            "@": "D:/work/webpack/src/",
+            "webpack": {
+                "@":"D:\\work\\webpack\\src"
+            },
+            "default":{ // 默认项
+                "@":"D:\\work\\webpack\\src"
+            },
         },
 
 ### 文件后缀
@@ -56,8 +62,8 @@
 ## 未来计划
 |计划名称|优先级|完成度|备注|
 |--|--|--|---|
-|支持 webpack config| 高| 10%|支持webpack的配置文件的`alias` 字段 |
+|支持 webpack config| 高| 完成|支持webpack的配置文件的`alias` 字段 |
 |支持 完整[webpack 别名](https://webpack.docschina.org/configuration/resolve/#resolve-alias)|高|未完成| |
 | typeScript 化| 低|未完成||
-|支持分项目解析|低|未完成| 需要先识别根目录|
+|支持分项目解析|低|99%| ~~需要先识别根目录~~，以工作空间的顶层文件夹名为根目录|
 |数据持久化|低|未完成||
