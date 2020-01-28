@@ -10,7 +10,7 @@
 	"keywords": [
 		"alias",
 		"webpack",
-		"别名跳转"
+		"Alias jump"
 	],
 	"categories": [
 		"Other"
@@ -29,19 +29,19 @@
 					"type": "object",
 					"default": {},
 					"scope": "resource",
-					"description": "以工作空间顶层文件夹命名的映射表"
+					"description": "Mapping table named after workspace top folder"
 				},
 				"fileAliasSetting.fileSuffixs": {
 					"type": "object",
 					"default": {},
 					"scope": "resource",
-					"description": "需要解析的文件名称"
+					"description": "File name to be parsed"
 				},
 				"fileAliasSetting.configPos": {
 					"type": "object",
 					"default": {},
 					"scope": "resource",
-					"description": "指示webpack config 文件夹相对位置，首推"
+					"description": "Indicate the relative location of the webpack config folder, first recommendation"
 				}
 			}
 		}
