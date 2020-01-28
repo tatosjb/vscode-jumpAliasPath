@@ -6,7 +6,7 @@ const locfileSuffix = ["js","ts","vue","jsx"];
 const fileSuffixCON = Array.from(new Set(locfileSuffix.concat(fileSuffixs)));
 const WEBPACK_DEFAULT_CONFIG_NAME = ['webpack.config.js','webpack.config.dev.js','webpack.config.prod.js'];
 /**
- * 确定文件位置与后缀
+ * Determine file location and suffix
  */
 const realFilePath: any = (targetPath: string) => {
     
@@ -26,20 +26,20 @@ const realFilePath: any = (targetPath: string) => {
                 return `${targetPath}.${item}`;
             }
         }
-    }else{ // 带后缀~
+    }else{ // With suffix ~
         return targetPath;
     }
 }
 /**
- * 确定文件是否存在
+ * Determine if the file exists
  */
 const isFileExists: any = (targetPath: string)=>{
     return fs.existsSync(targetPath);
 }
 /**
- * 匹配别名映射
+ * Match alias mapping
  * 
- * 简单粗暴
+ * Simple and rude
  */
 const aliasMatch:any= (aliaName: string,webpackAliasConfig:any) =>{
     const aliaNameArr = aliaName.split('/');
@@ -48,11 +48,11 @@ const aliasMatch:any= (aliaName: string,webpackAliasConfig:any) =>{
     return webpackAliasConfig[aliaFlag] + '/' +aliaNameArr.join('/');
 }
 /**
- * 获取webpack config 文件，进而获取 配置文件内容 alias 配置
+ * Get the webpack config file, and then get the configuration file content alias configuration
  */
 const getConfigFile: any = (workspace: any) => {
     const configFile = configPos[workspace.name] ||  getDefaultConfigFile(workspace);
-    return configFile ? workspace.uri.fsPath + '\\'+configFile :''; // 返回的配置文件位置
+    return configFile ? workspace.uri.fsPath + '\\'+configFile :''; // Configuration file location returned
 }
 // 
 const getWorkSpaceName: any = (workDir: string) => {
@@ -66,7 +66,7 @@ const getWorkSpaceName: any = (workDir: string) => {
     } else if (workSpaceMatchSuccessful.length === 1) {
         return workSpaceMatchSuccessful[0];
     }else{
-        //TODO: 多个匹配处理
+        //TODO: Multiple matching processing
 
     }
 }
